@@ -1,14 +1,64 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
+    <div class="main-navbar">
+      <img src="@/assets/logo.png" alt="GetKlean Logo" class="nav-logo" />
+      <div class="main-nav-links">
+        <router-link to="/">Home</router-link> 
+        <a href="#services-section">Services</a> 
+        <router-link to="/testimonial">Testimonial</router-link> 
+        <router-link to="/customers">Customers</router-link> 
+        <router-link to="/about">About US</router-link> 
+        <router-link to="/contact">Contact US</router-link>
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
 
+# Smooth scroll for anchor navigation
+<script>
+export default {
+  methods: {
+    handleNavClick(e) {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (anchor) {
+        const hash = anchor.getAttribute('href');
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          this.slowScrollTo(target, 3000);
+        }
+      }
+    },
+    slowScrollTo(target, duration = 1800) {
+      const start = window.scrollY;
+      const end = target.getBoundingClientRect().top + window.scrollY;
+      const change = end - start;
+      const startTime = performance.now();
+      function animateScroll(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, start + change * easeInOutQuad(progress));
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      }
+      function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+      requestAnimationFrame(animateScroll);
+    }
+  }
+}
+</script>
 <style lang="scss">
+/* Logo container for independent styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+  height: 88px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -18,15 +68,132 @@
 }
 
 nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  gap: 32px;
+  border-radius: 0;
+  border: none;
+}
+nav .nav-links a,
+nav .nav-links .router-link,
+nav .nav-links .router-link-active,
+nav .nav-links .router-link-exact-active {
+  color: #fff !important;
+}
+nav .nav-links a {
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  font-size: 1.3rem;
+}
+nav .nav-links a:hover,
+nav .nav-links .router-link:hover {
+  background: #f0f4f8;
+  color: #42b983 !important;
+}
+nav .nav-links .router-link-exact-active {
+  background: #42b983;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(66,185,131,0.10);
+}
+/* Navigation bar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 88px;
+  padding: 0 24px;
+  background: 
+#3c86c7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.colorNav{
+  background: 
+#3c86c7;
+}
+.navbar nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  height: 88px;
+}
+.nav-logo {
+  height: 120px;
+  max-height: 140px;
+  width: 360px;
+  min-width: 220px;
+  border-radius: 6px;
+  object-fit: contain;
+  margin-right: 32px;
+}
+.nav-links {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-left: 60px;
+}
+.main-navbar {
+  display: flex;
+  align-items: center;
+  height: 88px;
+  padding: 0 24px;
+  background: 
+#3c86c7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.main-nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-left: 120px;
+  /* You can adjust margin-right if you want more space from the edge */
+}
+.main-navbar .nav-logo {
+  height: 120px;
+  max-height: 140px;
+  width: 360px;
+  min-width: 220px;
+  border-radius: 6px;
+  object-fit: contain;
+  margin-right: 32px;
+}
+.main-nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  /* You can adjust margin-left or flex here for alignment */
+}
+.main-nav-links a,
+.main-nav-links .router-link,
+.main-nav-links .router-link-active,
+.main-nav-links .router-link-exact-active {
+  color: #fff !important;
+}
+.main-nav-links a {
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  font-size: 1.3rem;
+}
+.main-nav-links a:hover,
+.main-nav-links .router-link:hover {
+  background: #f0f4f8;
+  color: #42b983 !important;
+}
+.main-nav-links .router-link-exact-active {
+  background: #42b983;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(66,185,131,0.10);
 }
 </style>

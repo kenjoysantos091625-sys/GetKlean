@@ -20,10 +20,18 @@ const routes = [
   }
 ]
 
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+
+// Redirect to home on page refresh if not already on home
+window.addEventListener('load', () => {
+  if (router.currentRoute.path !== '/') {
+    router.replace('/');
+  }
+});
 
 export default router
