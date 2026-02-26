@@ -54,7 +54,7 @@ export default {
 .testimonial-title {
   color: #fff;
   font-size: 4rem;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 48px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -90,7 +90,7 @@ export default {
 }
 .testimonial-text {
   color: #4390d1;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-align: left;
   margin-bottom: 40px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

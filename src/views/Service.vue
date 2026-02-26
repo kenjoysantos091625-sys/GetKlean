@@ -63,22 +63,22 @@ export default {
   padding: 0 16px;
 }
 .service-title {
-  font-size: 4rem;
+  font-size: 3rem;
   color: #4a90e2;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .service-desc {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #3b7fc4;
   margin-bottom: 40px;
   line-height: 1.3;
 }
 .service-highlight {
-  font-size: 2.5rem;
-  color: #3b7fc4;
+  font-size: 3rem;
+  color: #4a90e2;
   font-weight: 700;
-  margin-top: 24px;
+  margin-bottom: 30px;
 }
 .aircon-cards {
   display: flex;
@@ -135,10 +135,10 @@ export default {
   background: #ffe12b;
   color: #2196f3;
   font-weight: 700;
-  font-size: 2.4rem;
+  font-size: 2rem;
   border: none;
   border-radius: 10px;
-  padding: 24px 80px;
+  padding: 20px 60px;
   cursor: pointer;
   margin-bottom: 24px;
   transition: background 0.2s;
@@ -157,6 +157,7 @@ export default {
   font-weight: 700;
   display: block;
   margin-top: 8px;
+  margin-bottom: 8px;
 }
 /* Vue transition for ServiceSection */
 .fade-slide-enter-active, .fade-slide-leave-active {
