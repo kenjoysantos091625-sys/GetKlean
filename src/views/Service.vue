@@ -1,71 +1,82 @@
 <template>
-  <transition name="fade-slide" appear>
-    <section class="service-section">
-      <h2 class="service-title">What We Offer</h2>
-      <p class="service-desc">
-        Cleaning is a tough challenge for everyone. But we’re always up for any challenge!<br>
-        Our expert team has the perfect solution for every cleaning need, ensuring your home stays spotless and fresh.
-      </p>
-      <h3 class="service-highlight">Aircon Cleaning</h3>
-        <div class="aircon-cards">
-          <div class="aircon-card">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Window Type" />
-            <div class="card-overlay">
-              <div class="card-title">Window<br>Type</div>
-              <div class="card-price">P920</div>
-            </div>
-          </div>
-          <div class="aircon-card">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Split Type" />
-            <div class="card-overlay">
-              <div class="card-title">Split<br>Type</div>
-              <div class="card-price">P1,530</div>
-            </div>
-          </div>
-          <div class="aircon-card">
-            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Floor Mounted" />
-            <div class="card-overlay">
-              <div class="card-title">Floor<br>Mounted</div>
-              <div class="card-price">P2,960</div>
-            </div>
-          </div>
-          <div class="aircon-card">
-            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Casette Type" />
-            <div class="card-overlay">
-              <div class="card-title">Casette<br>Type</div>
-              <div class="card-price">P5,490</div>
-            </div>
-          </div>
+  <section class="service-section service-animate" ref="serviceSection">
+    <h2 class="service-title">What We Offer</h2>
+    <p class="service-desc">
+      Cleaning is a tough challenge for everyone. But we’re always up for any challenge!<br>
+      Our expert team has the perfect solution for every cleaning need, ensuring your home stays spotless and fresh.
+    </p>
+    <h3 class="service-highlight">Aircon Cleaning</h3>
+    <div class="aircon-cards">
+      <div class="aircon-card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Window Type" />
+        <div class="card-overlay">
+          <div class="card-title">Window<br>Type</div>
+          <div class="card-price">P920</div>
         </div>
-
-        <div class="aircon-book-section">
-          <button class="aircon-book-btn">BOOK NOW</button>
-          <div class="aircon-hotline">
-            Or Call our Aircon Cleaning Hotline<br>
-            <span class="aircon-hotline-number">(0931)-728-8845</span>
-          </div>
+      </div>
+      <div class="aircon-card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Split Type" />
+        <div class="card-overlay">
+          <div class="card-title">Split<br>Type</div>
+          <div class="card-price">P1,530</div>
         </div>
-    </section>
-  </transition>
+      </div>
+      <div class="aircon-card">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Floor Mounted" />
+        <div class="card-overlay">
+          <div class="card-title">Floor<br>Mounted</div>
+          <div class="card-price">P2,960</div>
+        </div>
+      </div>
+      <div class="aircon-card">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Casette Type" />
+        <div class="card-overlay">
+          <div class="card-title">Casette<br>Type</div>
+          <div class="card-price">P5,490</div>
+        </div>
+      </div>
+    </div>
+    <div class="aircon-book-section">
+      <button class="aircon-book-btn">BOOK NOW</button>
+      <div class="aircon-hotline">
+        Or Call our Aircon Cleaning Hotline<br>
+        <span class="aircon-hotline-number">(0931)-728-8845</span>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 export default {
   name: 'ServiceSection',
+  mounted() {
+    const section = this.$refs.serviceSection;
+    if (!section) return;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          section.classList.add('service-animate-active');
+        } else {
+          section.classList.remove('service-animate-active');
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(section);
+  }
 }
 </script>
 
 <style scoped>
 .service-section {
   text-align: center;
-  margin: 80px auto 0 auto;
+  margin: 100px auto 0 auto;
   max-width: 1200px;
   padding: 0 16px;
 }
 .service-title {
   font-size: 3rem;
   color: #4a90e2;
-  font-weight: 700;
+  /* font-weight: 700; */
   margin-bottom: 30px;
 }
 .service-desc {
@@ -159,6 +170,22 @@ export default {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+.aircon-img-animate {
+  opacity: 1;
+  animation: airconScaleAnim 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes airconScaleAnim {
+  0% {
+    transform: scale(0.85);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(0.85);
+  }
+}
 /* Vue transition for ServiceSection */
 .fade-slide-enter-active, .fade-slide-leave-active {
   transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1), transform 2s cubic-bezier(0.23, 1, 0.32, 1);
@@ -167,6 +194,16 @@ export default {
   opacity: 0;
   transform: translateY(40px);
 }
-</style>
+.service-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.service-animate-active {
+  opacity: 1;
+  transform: none;
+}
 /* Fade-in animation for ServiceSection */
+</style>
+
 

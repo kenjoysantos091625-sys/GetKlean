@@ -3,12 +3,12 @@
     <div class="main-navbar">
       <img src="@/assets/logo.png" alt="GetKlean Logo" class="nav-logo" />
       <div class="main-nav-links">
-        <router-link to="/">Home</router-link> 
-        <a href="#services-section">Services</a> 
-        <router-link to="/testimonial">Testimonial</router-link> 
-        <router-link to="/customers">Customers</router-link> 
-        <router-link to="/about">About US</router-link> 
-        <router-link to="/contact">Contact US</router-link>
+        <a href="#" :class="{ 'active-link': activeSection === 'home' }" @click="handleHomeClick">Home</a>
+        <a href="#services-section" :class="{ 'active-link': activeSection === 'services-section' }" @click="handleServicesClick">Services</a>
+        <a href="#testimonial-section" :class="{ 'active-link': activeSection === 'testimonial-section' }" @click="handleNavClick">Testimonial</a>
+        <router-link to="/customers" :class="{ 'active-link': activeSection === 'customers' }">Customers</router-link> 
+        <router-link to="/about" :class="{ 'active-link': activeSection === 'about' }">About US</router-link> 
+        <router-link to="/contact" :class="{ 'active-link': activeSection === 'contact' }">Contact US</router-link>
       </div>
     </div>
     <router-view/>
@@ -18,19 +18,33 @@
 # Smooth scroll for anchor navigation
 <script>
 export default {
+  data() {
+    return {
+      activeSection: 'home'
+    }
+  },
   methods: {
+    handleHomeClick() {
+      this.activeSection = 'home';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
     handleNavClick(e) {
-      const anchor = e.target.closest('a[href^="#"]');
-      if (anchor) {
-        const hash = anchor.getAttribute('href');
-        const target = document.querySelector(hash);
-        if (target) {
-          e.preventDefault();
-          this.slowScrollTo(target, 3000);
-        }
+      e.preventDefault();
+      this.activeSection = 'testimonial-section';
+      const target = document.getElementById('testimonial-section');
+      if (target) {
+        this.slowScrollTo(target, 1200);
       }
     },
-    slowScrollTo(target, duration = 1800) {
+    handleServicesClick(e) {
+      e.preventDefault();
+      this.activeSection = 'services-section';
+      const target = document.getElementById('services-section');
+      if (target) {
+        this.slowScrollTo(target, 1200);
+      }
+    },
+    slowScrollTo(target, duration = 1200) {
       const start = window.scrollY;
       const end = target.getBoundingClientRect().top + window.scrollY;
       const change = end - start;
@@ -146,9 +160,11 @@ nav .nav-links .router-link-exact-active {
   align-items: center;
   height: 88px;
   padding: 0 24px;
-  background: 
-#3c86c7;
+  background: #3c86c7;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .main-nav-links {
   display: flex;
@@ -191,6 +207,7 @@ nav .nav-links .router-link-exact-active {
   background: #f0f4f8;
   color: #42b983 !important;
 }
+.main-nav-links .active-link,
 .main-nav-links .router-link-exact-active {
   background: #42b983;
   color: #fff !important;

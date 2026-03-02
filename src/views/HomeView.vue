@@ -39,9 +39,21 @@ export default {
 </script>
 
 <style scoped>
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 .aircon-hero {
   display: flex;
-  min-height: 80vh;
+  min-height: 90vh;
   background: #f7f6f6;
 }
 .hero-left {
